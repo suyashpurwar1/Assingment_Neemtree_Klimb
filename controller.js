@@ -33,49 +33,40 @@ class ReaderController {
         throw new Error("Unsupported file format");
       }
 
-      // Get the total number of rows
-      const totalRows = jsonData.length;
-
-      // Initialize counters for rows added, skipped, and not processed
-      let rowsAdded = 0;
-      let rowsSkipped = 0;
-      let rowsNotProcessed = 0;
-
-      // Loop through each candidate data
-      await async.eachSeries(jsonData, async (candidate) => {
+      // Use async.eachSeries to loop through each candidate data
+      async.eachSeries(jsonData, async (candidate) => {
         const email = candidate.Email;
 
-        // Check for duplicate email
-        const existing = await CandidateModel.findOne({ Email: email });
-        if (existing) {
-          console.log(`Skipping duplicate: ${email}`);
-          rowsSkipped++;
-          return; // Skip duplicate
-        }
+       
+          // Check for duplicate email
+          const existing = await CandidateModel.findOne({ Email: email });
+          if (existing) {
+            console.log(`Skipping duplicate: ${email}`);
+             // Skip duplicate and move to next iteration
+             return ;
+          }
 
-        // Create and save new candidate
-        try {
+          // Create and save new candidate
           const newCandidate = new CandidateModel(candidate);
           await newCandidate.save();
           console.log(`Saved candidate: ${email}`);
-          rowsAdded++;
-        } catch (err) {
-          console.error(`Error saving candidate: ${err.message}`);
-          rowsNotProcessed++;
+           // Move to next iteration
+         
+      }, (err) => {
+        // Respond with success or error after all iterations are complete
+        if (err) {
+          
+          res.status(400).json({ success: false, msg: "Kindly Check Uploaded File" });
+        } else {
+          res.status(200).json({
+            success: true,
+            msg: `Candidates imported from ${fileExtension}`,
+          });
         }
       });
 
-      // Respond with success or error
-      res.status(200).json({
-        success: true,
-        msg: `Candidates imported from ${fileExtension}`,
-        totalRows,
-        rowsAdded,
-        rowsSkipped,
-        rowsNotProcessed,
-      });
     } catch (err) {
-      res.status(400).json({ success: false, msg: err.message });
+      res.status(400).json({ success: false, msg: "Kindly Upload Correct File" });
     }
   }
 }

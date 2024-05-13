@@ -28,7 +28,6 @@ const AddCandidate = () => {
       "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
       "application/vnd.ms-excel",
     ];
-    console.log(file.type);
     // If user tried to upload file other than excel then it show alert.
     if (!allowedFileTypes.includes(file.type)) {
       alert("Please upload a valid Excel file (.xlsx or .xls).");
@@ -47,16 +46,19 @@ const AddCandidate = () => {
       );
 
       // Log the response data for debugging
-      console.log(response.data);
+      // console.log(response.data);
 
       // Check if the response indicates success
       if (response.data.success) {
         // Update state to show the success message
         setShowSuccess(true);
+        alert(
+          `Total Rows: ${response.data.totalRows}\nRows Added: ${response.data.rowsAdded}\nRows Skipped (Duplicate): ${response.data.rowsSkipped}\nRows Not Processed (Model Mismatch or Required Field Missing): ${response.data.rowsNotProcessed}`
+        );
       }
     } catch (error) {
       // Handle any errors during file upload
-      console.error("Error uploading file:", error.response.data.msg);
+      // console.error("Error uploading file:", error.response.data.msg);
       // Set the error message received from the server
       setErrorMessage(error.response.data.msg);
       // Show the error message as an alert
