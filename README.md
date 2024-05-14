@@ -49,8 +49,15 @@ The backend of this project is hosted on Render and can be accessed using the fo
 - Uses FormData to send file data to the backend API endpoint.
 
 ## Setup Instructions
-1. Clone the repository.
-2. Install dependencies for both frontend and backend:
+1. You can clone the repository for this project using the following command:
+
+```
+git clone https://github.com/suyashpurwar1/Assingment_Neemtree_Klimb.git
+```
+
+This will create a local copy of the repository on your machine.
+
+2. Install dependencies for both frontend(client) and backend(server):
    ```bash
    npm install
    ```
