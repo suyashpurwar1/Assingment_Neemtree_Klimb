@@ -51,9 +51,9 @@ The backend of this project is hosted on Render and can be accessed using the fo
 ## Setup Instructions
 1. You can clone the repository for this project using the following command:
 
-```
-git clone https://github.com/suyashpurwar1/Assingment_Neemtree_Klimb.git
-```
+  ```
+  git clone https://github.com/suyashpurwar1/Assingment_Neemtree_Klimb.git
+  ```
 
 This will create a local copy of the repository on your machine.
 
