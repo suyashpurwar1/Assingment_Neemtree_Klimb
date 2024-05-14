@@ -56,6 +56,7 @@ const AddCandidate = () => {
           `Total Rows: ${response.data.totalRows}\nRows Added: ${response.data.rowsAdded}\nRows Skipped (Duplicate): ${response.data.rowsSkipped}\nRows Not Processed (Model Mismatch or Required Field Missing): ${response.data.rowsNotProcessed}`
         );
       }
+      // added alert of the data provided from api.
     } catch (error) {
       // Handle any errors during file upload
       // console.error("Error uploading file:", error.response.data.msg);

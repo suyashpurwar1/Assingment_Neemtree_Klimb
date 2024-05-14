@@ -81,3 +81,6 @@ class ReaderController {
 }
 
 module.exports = new ReaderController();
+
+// I added 3 variable one is rowsSkipped that count dupicate , other is rowsAdded that count rows saved in mongoDB database
+// last is rowsNotProcessed it count row is not processed due to model miss match and missing required model.
