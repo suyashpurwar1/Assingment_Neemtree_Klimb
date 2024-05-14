@@ -10,6 +10,8 @@ const AddCandidate = () => {
   const [showSuccess, setShowSuccess] = useState(false); // Flag for success message visibility
   const [errorMessage, setErrorMessage] = useState(""); // Holds the error message
 
+  const baseURL = "https://assingment-neemtree-klimb.onrender.com";
+
   // Function to handle file selection changes
   const handleFileChange = (event) => {
     // Update state with the selected file from the event target
@@ -40,10 +42,7 @@ const AddCandidate = () => {
       formData.append("file", file); // Add the selected file to the form data
 
       // Make a POST request to the backend API endpoint with the form data
-      const response = await axios.post(
-        "http://127.0.0.1:5000/importdata",
-        formData
-      );
+      const response = await axios.post(`${baseURL}/importdata`, formData);
 
       // Log the response data for debugging
       // console.log(response.data);
